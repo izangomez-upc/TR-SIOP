@@ -1,5 +1,13 @@
 #include <stdio.h>
 
+es_primer(int n) {
+
+}
+
 int main(int argc, char *argv[]) {
-  long n = 10000000
+  int n = 20;
+  int numPrimers = 0;
+  for (int i = 2; i < n; ++i) {
+    if (es_primer(i)) ++numPrimers;
+  }
 }
