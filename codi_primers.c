@@ -1,6 +1,8 @@
+#include <string.h>
 #include <stdlib.h>
 #include <math.h>
 #include <stdio.h>
+#include <unistd.h>
 
 int es_primer(int n) {
     int primer = 1;
@@ -12,9 +14,16 @@ int es_primer(int n) {
 
 int main(int argc, char *argv[]) {
   int n = atoi(argv[1]);
+  int m = atoi(argv[2]);
   int numPrimers = 0;
-  for (int i = 2; i <= n; ++i) {
+  int i;
+  if (n == 1) i = 2;
+  else i = n; 
+  while (i <= m) {
     if (es_primer(i)) ++numPrimers;
+    ++i;
   }
-  printf("Hi ha %d nombres primers entre l'1 i el %d\n", numPrimers, n);
+  char buffer[12];
+  snprintf(buffer, sizeof(buffer), "%d", numPrimers);
+  write(1, buffer, strlen(buffer));
 }
