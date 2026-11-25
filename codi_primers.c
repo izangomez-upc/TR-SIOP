@@ -6,7 +6,7 @@
 
 int es_primer(int n) {
     int primer = 1;
-    for (int i = 2; i*i <= n && primer; ++i) {
+    for (int i = 2; i <= n/i && primer; ++i) {
         if (n%i == 0) primer = 0;
     }
     return primer;
@@ -21,6 +21,7 @@ int main(int argc, char *argv[]) {
   else i = n; 
   while (i <= m) {
     if (es_primer(i)) ++numPrimers;
+    if (i == m) break;
     ++i;
   }
   char buffer[12];
