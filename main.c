@@ -52,14 +52,14 @@ int main (int argc, char *argv[]) {
     }
     int primers = 0;
     if (argv[1][0] == 'F') {
-        int files = ((m-n)/1000)+1;
+        int files = ((m-n)/10000)+1;
         int fd[files][2];
         int k = 0;
-        for (int i = n; i <= m; i += 1000) {
+        for (int i = n; i <= m; i += 10000) {
             int n1 = i;
             int n2;
-            if (n1 + 999 > m) n2 = m;
-            else n2 = n1 + 999;
+            if (n1 + 9999 > m) n2 = m;
+            else n2 = n1 + 9999;
             if (pipe(fd[k]) < 0) {
                 printf("Error a la pipe\n.");
                 exit(1);
@@ -70,8 +70,8 @@ int main (int argc, char *argv[]) {
                 exit(1);
             }
             if (id == 0) {
-                int r = comptar_primers(n1, n2);         // calcula su intervalo
-                write(fd[k][1], &r, sizeof(int));        // envía el resultado al padre
+                int r = comptar_primers(n1, n2);         // calcula el seu interval
+                write(fd[k][1], &r, sizeof(int));        // envia el resultat al pare
                 close(fd[k][1]);
                 exit(0);         
             }
@@ -79,7 +79,7 @@ int main (int argc, char *argv[]) {
             ++k;
         }
         k = 0;
-        for (int i = n; i <= m; i += 1000) {
+        for (int i = n; i <= m; i += 10000) {
             int r;
             read(fd[k][0], &r, sizeof(int));
             primers += r;
